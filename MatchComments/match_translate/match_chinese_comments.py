@@ -68,10 +68,14 @@ if __name__ == '__main__':
     to_lan = arguments[5]
     
     if len(filter_file) > 0:
-        ignore_files.append(filter_file)
+        results = filter_file.split(',')
+        for file in results:
+            ignore_files.append(file)
 
     if len(filter_text) > 0:
-        ignore_patterns.append(filter_text)
+        results = filter_text.split(',')
+        for text in results:
+            ignore_patterns.append(text)
         
     for arg in arguments:
         print(arg)
