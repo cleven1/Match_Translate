@@ -45,7 +45,11 @@ def find_chinese_comments(directory: str, from_lan: str, to_lan: str):
                         for item in translates:
                             src = item["src"]
                             dst = str(item["dst"])
-                            dst = dst.replace("*", "* ").replace("///", "/// ").replace("//", "// ")
+                            dst = dst.replace("*", "* ")
+                            if "///" in dst:
+                                dst = dst.replace("///", "/// ")
+                            else:
+                                dst = dst.replace("//", "// ")
                             content = content.replace(src, dst)
                         time.sleep(0.5)
 

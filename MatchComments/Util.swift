@@ -33,7 +33,9 @@ struct Util {
         return try await withUnsafeThrowingContinuation { continuation in
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let output = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .newlines)
-            continuation.resume(returning: (task?.terminationStatus == 0, output ?? ""))
+            let isRunning = (task?.isRunning ?? false)
+            let result = isRunning ? task?.terminationStatus == 0 : false
+            continuation.resume(returning: (result, output ?? ""))
         }
     }
     
