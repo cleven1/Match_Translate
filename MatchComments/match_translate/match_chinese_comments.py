@@ -1,4 +1,4 @@
-import re, os, time, random, sys
+import re, os, time, sys
 import baidu_translate
 
 # 遍历指定目录下所有以.(swift, h, m)结尾的文件
@@ -14,7 +14,8 @@ def find_files(directory):
 
 # 匹配中文注释的正则表达式
 pattern = r"//[^\n]*?[\u4e00-\u9fa5]+[^\n]*"
-pattern1 = r"/\*\*([\s\S]*?)\*/"
+#pattern1 = r"/\*\*([\s\S]*?)\*/"
+pattern1 = r"[\u4e00-\u9fa5]+"
 
 # 忽略不用处理的中文注释文件夹
 ignore_files = []
@@ -46,7 +47,7 @@ def find_chinese_comments(directory: str, from_lan: str, to_lan: str):
                             dst = str(item["dst"])
                             dst = dst.replace("*", "* ").replace("///", "/// ").replace("//", "// ")
                             content = content.replace(src, dst)
-                        time.sleep(random.randint(1, 3))
+                        time.sleep(0.5)
 
             # 用新的content写回原文件
             with open(file_path, "w", encoding="utf-8") as file:

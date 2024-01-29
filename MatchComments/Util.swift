@@ -38,7 +38,7 @@ struct Util {
     }
     
     static func stop() {
-        if let _ = task?.isRunning {
+        if (task?.isRunning ?? false) {
             task?.terminate()
         }
         task = Process()
